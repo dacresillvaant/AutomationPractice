@@ -1,19 +1,17 @@
 package driver;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class CustomisedDriver {
 
-    WebDriver driver;
-
-    public CustomisedDriver() {
-        this.driver = setUp();
-    }
-
-    public WebDriver setUp() {
+    public ChromeDriver setUp() {
+        ChromeOptions options = new ChromeOptions();
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        options.addArguments("--incognito");
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        ChromeDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         return driver;
     }
