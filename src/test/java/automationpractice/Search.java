@@ -11,7 +11,7 @@ public class Search {
     ChromeDriver driver = new CustomisedDriver().setUp();
 
     @Test
-    public void assertThatSearchReturnsNoneResultsGivenTrololo() {
+    void assertThatSearchReturnsNoneResultsGivenTrololo() {
         driver.get("http://automationpractice.com/index.php");
         driver.findElement(By.id("search_query_top")).sendKeys("Trololo");
         driver.findElement(By.xpath("//*[contains(@name, 'submit_search')]")).click();

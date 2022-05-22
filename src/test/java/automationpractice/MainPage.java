@@ -17,10 +17,12 @@ public class MainPage {
     }
 
     @Test
-    public void assertThatWebURLisCorrect() {
+    void assertThatWebURLisCorrect() {
         driver.get("http://automationpractice.com/index.php");
         String expectedUrl = "http://automationpractice.com/index.php";
         String actualUrl = driver.getCurrentUrl();
         Assertions.assertEquals(expectedUrl, actualUrl, "Actual URL is incorrect.");
     }
+
+
 }
