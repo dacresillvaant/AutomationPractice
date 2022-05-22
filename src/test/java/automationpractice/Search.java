@@ -19,4 +19,13 @@ public class Search {
         String actualResults = driver.findElement(By.xpath("//*[contains(text(), 'results have been found')]")).getText();
         Assertions.assertEquals(expectedResults, actualResults, "Amount of results is different than 0.");
     }
+
+    @Test
+    void assertThatLogoRedirectsFromSearchResultsToHomePage() {
+        driver.get("http://automationpractice.com/index.php?controller=search&orderby=position&orderway=desc&search_query=Trololo&submit_search=");
+        driver.findElement(By.cssSelector(".logo.img-responsive")).click();
+        String expectedUrl = "http://automationpractice.com/index.php";
+        String actualUrl = driver.getCurrentUrl();
+        Assertions.assertEquals(expectedUrl, actualUrl);
+    }
 }
