@@ -11,7 +11,7 @@ public class CustomisedDriver {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         options.addArguments("--incognito");
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        ChromeDriver driver = new ChromeDriver();
+        ChromeDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         return driver;
     }

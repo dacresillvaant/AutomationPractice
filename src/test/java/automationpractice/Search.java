@@ -28,4 +28,14 @@ public class Search {
         String actualUrl = driver.getCurrentUrl();
         Assertions.assertEquals(expectedUrl, actualUrl);
     }
+
+    @Test
+    void assertThatSearchReturns7ResultsGivenDress() {
+        driver.get("http://automationpractice.com/index.php");
+        driver.findElement(By.id("search_query_top")).sendKeys("dress");
+        driver.findElement(By.xpath("//*[contains(@name, 'submit_search')]")).click();
+        String expectedResults = "7 results have been found.";
+        String actualResults = driver.findElement(By.xpath("//*[contains(text(), 'results have been found')]")).getText();
+        Assertions.assertEquals(expectedResults, actualResults, "Amount of results is different than 7.");
+    }
 }
