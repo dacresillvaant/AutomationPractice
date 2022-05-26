@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-import java.util.List;
-
 public class Search {
 
     ChromeDriver driver = new CustomisedDriver().setUp();
@@ -22,6 +20,15 @@ public class Search {
         String expectedResults = "0 results have been found.";
         String actualResults = driver.findElement(By.xpath("//*[contains(text(), 'results have been found')]")).getText();
         Assertions.assertEquals(expectedResults, actualResults, "Amount of results is different than 0.");
+    }
+
+    @Test
+    void assertThatSearchReturnsInfoGivenNoImput() {
+        driver.get("http://automationpractice.com/index.php");
+        driver.findElement(By.xpath("//*[contains(@name, 'submit_search')]")).click();
+        String expectedResult = "Please enter a search keyword";
+        String actualResult = driver.findElement(By.xpath("//*[contains(text(), 'Please enter a search keyword')]")).getText();
+        Assertions.assertEquals(expectedResult, actualResult, "Info incorrect or not found.");
     }
 
     @Test
@@ -48,7 +55,6 @@ public class Search {
         driver.get("http://automationpractice.com/index.php");
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
         driver.findElement(By.xpath("//*[contains(@name, 'submit_search')]")).click();
-        List<WebElement> foundElements = driver.findElements(By.xpath("//*[contains(@title, 'Printed Summer Dress')]"));
         WebElement foundElement = driver.findElements(By.xpath("//*[contains(@title, 'Printed Summer Dress')]")).get(1);
         Actions builder = new Actions(driver);
         builder.moveToElement(foundElement).perform();
