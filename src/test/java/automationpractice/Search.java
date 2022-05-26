@@ -1,18 +1,19 @@
 package automationpractice;
 
 import driver.CustomisedDriver;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-public class Search {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class Search {
 
-    public static ChromeDriver driver = new CustomisedDriver().setUp();
+    static ChromeDriver driver = new CustomisedDriver().setUp();
 
     @Test
+    @Order(1)
     void assertThatSearchReturnsNoneResultsGivenTrololo() {
         driver.get("http://automationpractice.com/index.php");
         driver.findElement(By.id("search_query_top")).sendKeys("Trololo");
@@ -23,7 +24,8 @@ public class Search {
     }
 
     @Test
-    void assertThatSearchReturnsInfoGivenNoImput() {
+    @Order(2)
+    void assertThatSearchReturnsInfoGivenNoInput() {
         driver.get("http://automationpractice.com/index.php");
         driver.findElement(By.xpath("//*[contains(@name, 'submit_search')]")).click();
         String expectedResult = "Please enter a search keyword";
@@ -32,6 +34,7 @@ public class Search {
     }
 
     @Test
+    @Order(3)
     void assertThatLogoRedirectsFromSearchResultsToHomePage() {
         driver.get("http://automationpractice.com/index.php?controller=search&orderby=position&orderway=desc&search_query=Trololo&submit_search=");
         driver.findElement(By.cssSelector(".logo.img-responsive")).click();
@@ -41,6 +44,7 @@ public class Search {
     }
 
     @Test
+    @Order(4)
     void assertThatSearchReturns7ResultsGivenDress() {
         driver.get("http://automationpractice.com/index.php");
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
@@ -51,6 +55,7 @@ public class Search {
     }
 
     @Test
+    @Order(5)
     void assertThatFoundSearchResultHaveAddToCartAndMoreButtons() {
         driver.get("http://automationpractice.com/index.php");
         driver.findElement(By.id("search_query_top")).sendKeys("dress");
