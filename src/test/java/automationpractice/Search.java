@@ -10,7 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 
 public class Search {
 
-    ChromeDriver driver = new CustomisedDriver().setUp();
+    public static ChromeDriver driver = new CustomisedDriver().setUp();
 
     @Test
     void assertThatSearchReturnsNoneResultsGivenTrololo() {
