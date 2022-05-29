@@ -12,6 +12,11 @@ class Search {
 
     static ChromeDriver driver = new CustomisedDriver().setUp();
 
+    @AfterAll
+    static void finishTest() {
+        driver.close();
+    }
+
     @Test
     @Order(1)
     void assertThatSearchReturnsNoneResultsGivenTrololo() {
