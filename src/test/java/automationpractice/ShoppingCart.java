@@ -28,7 +28,7 @@ class ShoppingCart {
         WebElement item = driver.findElements(By.xpath("//*[contains(@title, 'Faded Short Sleeve T-shirts')]")).get(1);
         WebElement addToCartButton = driver.findElements(By.xpath("//*[contains(text(), 'Add to cart')]")).get(0);
         String expectedModalTitle = "Product successfully added to your shopping cart";
-        String shoppingCartModalXPath = "//div[@style='top: 199px; display: block;']//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
+        String shoppingCartModalXPath = "//div[contains(@style, 'display: block;')][1]//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
 
         //act
         builder.moveToElement(item).perform();
@@ -46,8 +46,8 @@ class ShoppingCart {
         driver.get("http://automationpractice.com/index.php");
         WebElement item = driver.findElements(By.xpath("//*[contains(@title, 'Faded Short Sleeve T-shirts')]")).get(1);
         WebElement addToCartButton = driver.findElements(By.xpath("//*[contains(text(), 'Add to cart')]")).get(0);
-        String shoppingCartModalXPath = "//div[@style='top: 199px; display: block;']//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
-        String continueShoppingButtonXPath = "//div[@style='top: 199px; display: block;']//span[@title='Continue shopping']";
+        String shoppingCartModalXPath = "//div[contains(@style, 'display: block;')][1]//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
+        String continueShoppingButtonXPath = "//div[contains(@style, 'display: block;')][1]//span[@title='Continue shopping']";
 
         //act
         builder.moveToElement(item).perform();
@@ -55,6 +55,7 @@ class ShoppingCart {
         Utils.waitForElement(driver, shoppingCartModalXPath);
         WebElement continueShoppingButton = driver.findElement(By.xpath(continueShoppingButtonXPath));
         continueShoppingButton.click();
+        Thread.sleep(1000);
 
         //assert
         Assertions.assertThrows(NoSuchElementException.class, () -> driver.findElement(By.xpath(shoppingCartModalXPath)));
