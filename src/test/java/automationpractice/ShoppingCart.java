@@ -60,4 +60,28 @@ class ShoppingCart {
         //assert
         Assertions.assertThrows(NoSuchElementException.class, () -> driver.findElement(By.xpath(shoppingCartModalXPath)));
     }
+
+    @Test
+    void assertThatCheckoutPageIsShownAfterProceedToCheckoutIsPressed() throws InterruptedException {
+        //arrange
+        driver.get("http://automationpractice.com/index.php");
+        WebElement item = driver.findElements(By.xpath("//*[contains(@title, 'Faded Short Sleeve T-shirts')]")).get(1);
+        WebElement addToCartButton = driver.findElements(By.xpath("//*[contains(text(), 'Add to cart')]")).get(0);
+        String shoppingCartModalXPath = "//div[contains(@style, 'display: block;')][1]//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
+        String proceedToCheckoutButtonXPath = "//div[contains(@style, 'display: block;')][1]//a[@title='Proceed to checkout']";
+        String shoppingCartSummaryXPath = "//h1[contains(text(), 'Shopping-cart summary')]";
+        String expectedURL = "http://automationpractice.com/index.php?controller=order";
+
+        //act
+        builder.moveToElement(item).perform();
+        addToCartButton.click();
+        Utils.waitForElement(driver, shoppingCartModalXPath);
+        WebElement proceedToCheckoutButton = driver.findElement(By.xpath(proceedToCheckoutButtonXPath));
+        proceedToCheckoutButton.click();
+        Utils.waitForElement(driver, shoppingCartSummaryXPath);
+        String actualURL = driver.getCurrentUrl();
+
+        //assert
+        Assertions.assertEquals(expectedURL, actualURL, "URL mismatch.");
+    }
 }
