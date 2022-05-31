@@ -17,7 +17,7 @@ public class Utils {
         return isPresent;
     }
 
-    public static void waitForElement(WebDriver driver, String xPath) throws InterruptedException {
+    public static void waitForElement(WebDriver driver, String xPath, int retryAmount) throws InterruptedException {
         boolean isLoaded = false;
         int tryIndex = 1;
         while (isLoaded == false) {
@@ -25,7 +25,7 @@ public class Utils {
             tryIndex++;
             isLoaded = isElementPresentByXPath(driver, xPath);
             Thread.sleep(1000);
-            if (tryIndex == 30) {
+            if (tryIndex == retryAmount) {
                 break;
             }
         }

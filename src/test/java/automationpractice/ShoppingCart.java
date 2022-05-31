@@ -33,7 +33,7 @@ class ShoppingCart {
         //act
         builder.moveToElement(item).perform();
         addToCartButton.click();
-        Utils.waitForElement(driver, shoppingCartModalXPath);
+        Utils.waitForElement(driver, shoppingCartModalXPath, 30);
         String actualModalTitle = driver.findElement(By.xpath(shoppingCartModalXPath)).getText();
 
         //assert
@@ -52,7 +52,7 @@ class ShoppingCart {
         //act
         builder.moveToElement(item).perform();
         addToCartButton.click();
-        Utils.waitForElement(driver, shoppingCartModalXPath);
+        Utils.waitForElement(driver, shoppingCartModalXPath, 30);
         WebElement continueShoppingButton = driver.findElement(By.xpath(continueShoppingButtonXPath));
         continueShoppingButton.click();
         Thread.sleep(1000);
@@ -75,10 +75,10 @@ class ShoppingCart {
         //act
         builder.moveToElement(item).perform();
         addToCartButton.click();
-        Utils.waitForElement(driver, shoppingCartModalXPath);
+        Utils.waitForElement(driver, shoppingCartModalXPath, 30);
         WebElement proceedToCheckoutButton = driver.findElement(By.xpath(proceedToCheckoutButtonXPath));
         proceedToCheckoutButton.click();
-        Utils.waitForElement(driver, shoppingCartSummaryXPath);
+        Utils.waitForElement(driver, shoppingCartSummaryXPath, 30);
         String actualURL = driver.getCurrentUrl();
 
         //assert
