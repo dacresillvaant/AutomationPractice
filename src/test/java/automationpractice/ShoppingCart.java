@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -25,17 +26,37 @@ class ShoppingCart {
         //arrange
         driver.get("http://automationpractice.com/index.php");
         WebElement item = driver.findElements(By.xpath("//*[contains(@title, 'Faded Short Sleeve T-shirts')]")).get(1);
-        builder.moveToElement(item).perform();
         WebElement addToCartButton = driver.findElements(By.xpath("//*[contains(text(), 'Add to cart')]")).get(0);
         String expectedModalTitle = "Product successfully added to your shopping cart";
+        String shoppingCartModalXPath = "//div[@style='top: 199px; display: block;']//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
 
         //act
+        builder.moveToElement(item).perform();
         addToCartButton.click();
-        String shoppingCartModalXPath = "//div[@id='layer_cart']//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
         Utils.waitForElement(driver, shoppingCartModalXPath);
         String actualModalTitle = driver.findElement(By.xpath(shoppingCartModalXPath)).getText();
 
         //assert
         Assertions.assertEquals(expectedModalTitle, actualModalTitle, "Adding product to shopping cart failed.");
+    }
+
+    @Test
+    void assertThatModalShownAfterAddToCartIsPressedDisappearsAfterContinueShoppingIsPressed() throws InterruptedException {
+        //arrange
+        driver.get("http://automationpractice.com/index.php");
+        WebElement item = driver.findElements(By.xpath("//*[contains(@title, 'Faded Short Sleeve T-shirts')]")).get(1);
+        WebElement addToCartButton = driver.findElements(By.xpath("//*[contains(text(), 'Add to cart')]")).get(0);
+        String shoppingCartModalXPath = "//div[@style='top: 199px; display: block;']//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
+        String continueShoppingButtonXPath = "//div[@style='top: 199px; display: block;']//span[@title='Continue shopping']";
+
+        //act
+        builder.moveToElement(item).perform();
+        addToCartButton.click();
+        Utils.waitForElement(driver, shoppingCartModalXPath);
+        WebElement continueShoppingButton = driver.findElement(By.xpath(continueShoppingButtonXPath));
+        continueShoppingButton.click();
+
+        //assert
+        Assertions.assertThrows(NoSuchElementException.class, () -> driver.findElement(By.xpath(shoppingCartModalXPath)));
     }
 }
