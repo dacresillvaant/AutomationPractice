@@ -1,5 +1,6 @@
 package automationpractice;
 
+import Utils.Utils;
 import driver.CustomisedDriver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,11 +31,11 @@ class ShoppingCart {
 
         //act
         addToCartButton.click();
-        Thread.sleep(5000);
-        String actualModalTitle = driver.findElement(By.xpath("//div[@id='layer_cart']//h2[contains(text()[2], 'Product successfully added to your shopping cart')]")).getText();
+        String shoppingCartModalXPath = "//div[@id='layer_cart']//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
+        Utils.waitForElement(driver, shoppingCartModalXPath);
+        String actualModalTitle = driver.findElement(By.xpath(shoppingCartModalXPath)).getText();
 
         //assert
         Assertions.assertEquals(expectedModalTitle, actualModalTitle, "Adding product to shopping cart failed.");
-
     }
 }
