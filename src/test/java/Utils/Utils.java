@@ -2,6 +2,7 @@ package Utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class Utils {
 
@@ -28,6 +29,13 @@ public class Utils {
             if (tryIndex == retryAmount) {
                 break;
             }
+        }
+    }
+
+    public static void clickElementNTimes(WebElement element, int n, int sleepIntervalMilliseconds) throws InterruptedException {
+        for (int i = 0; i < n; i++) {
+            element.click();
+            Thread.sleep(sleepIntervalMilliseconds);
         }
     }
 }
