@@ -23,7 +23,7 @@ class ShoppingCart {
         builder = new Actions(driver);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index} => Checks product number=''{0}''")
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
     void assertThatModalIsShownAfterAddToCartIsPressed(int productNumber) throws InterruptedException {
         //arrange
