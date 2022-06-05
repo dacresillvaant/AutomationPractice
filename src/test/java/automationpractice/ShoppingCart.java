@@ -5,6 +5,8 @@ import driver.CustomisedDriver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -21,12 +23,13 @@ class ShoppingCart {
         builder = new Actions(driver);
     }
 
-    @Test
-    void assertThatModalIsShownAfterAddToCartIsPressed() throws InterruptedException {
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
+    void assertThatModalIsShownAfterAddToCartIsPressed(int productNumber) throws InterruptedException {
         //arrange
         driver.get("http://automationpractice.com/index.php");
-        WebElement item = driver.findElements(By.xpath("//*[contains(@title, 'Faded Short Sleeve T-shirts')]")).get(1);
-        WebElement addToCartButton = driver.findElements(By.xpath("//*[contains(text(), 'Add to cart')]")).get(0);
+        WebElement item = driver.findElements(By.xpath("//li[contains(@class, 'ajax_block_product')]")).get(productNumber);
+        WebElement addToCartButton = driver.findElements(By.xpath("//li[contains(@class, 'ajax_block_product')]//a[@title='Add to cart']")).get(productNumber);
         String expectedModalTitle = "Product successfully added to your shopping cart";
         String shoppingCartModalXPath = "//div[contains(@style, 'display: block;')][1]//h2[contains(text()[2], 'Product successfully added to your shopping cart')]";
 
