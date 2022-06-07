@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class Search {
+class SearchTest {
 
     static ChromeDriver driver = new CustomisedDriver().setUp();
 

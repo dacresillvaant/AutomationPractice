@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class MainPage {
+class MainPageTest {
 
     ChromeDriver driver = new CustomisedDriver().setUp();
 

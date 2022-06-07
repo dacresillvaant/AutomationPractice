@@ -1,6 +1,6 @@
 package automationpractice;
 
-import Utils.Utils;
+import utils.Utils;
 import driver.CustomisedDriver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-class ShoppingCart {
+class ShoppingCartTest {
 
     static ChromeDriver driver = new CustomisedDriver().setUp();
     private Actions builder;
