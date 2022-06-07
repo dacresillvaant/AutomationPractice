@@ -1,6 +1,5 @@
 package automationpractice;
 
-import utils.Utils;
 import driver.CustomisedDriver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +11,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import utils.Utils;
 
 class ShoppingCartTest {
 
@@ -89,7 +89,7 @@ class ShoppingCartTest {
     }
 
     @Test
-    void assertThatQuantityOfProductIsIncreasedAfterPlusButtonIsPressed() throws InterruptedException {
+    void assertThatQuantityOfProductChangesWhenPlusAndMinusButtonsArePressed() throws InterruptedException {
         //arrange
         driver.get("http://automationpractice.com/index.php");
         WebElement item = driver.findElements(By.xpath("//*[contains(@title, 'Faded Short Sleeve T-shirts')]")).get(1);
@@ -104,17 +104,17 @@ class ShoppingCartTest {
         proceedToCheckoutButton.click();
         Utils.waitForElement(driver, shoppingCartSummaryXPath, 30);
         WebElement plusButton = driver.findElement(By.xpath("//i[@class = 'icon-plus']"));
+        WebElement minusButton = driver.findElement(By.xpath("//i[@class = 'icon-minus']"));
         WebElement quantityLabel = driver.findElement(By.xpath("//input[@name='quantity_1_1_0_0_hidden']"));
-        String expectedQuantity = "5";
+        String expectedQuantity = "3";
         String actualQuantity;
 
         //act
         Utils.clickElementNTimes(plusButton, 4, 2000);
+        Utils.clickElementNTimes(minusButton, 2, 2000);
         actualQuantity = quantityLabel.getAttribute("value");
 
         //assert
         Assertions.assertEquals(expectedQuantity, actualQuantity, "Quantity of product is different than " + expectedQuantity);
     }
-
-
 }
