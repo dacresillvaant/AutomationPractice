@@ -50,6 +50,29 @@ class MainPageTest {
 
         //assert
         Assertions.assertEquals(expectedValidationMessage, actualValidationMessage);
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"test@test.pl", "john.doe@gmail.com"})
+    void assertThatValidationIsShownForAlreadyRegisteredEmail(String input) {
+        //arange
+        driver.get("http://automationpractice.com/index.php");
+        String newsletterLabelXPath = "//input[@id='newsletter-input']";
+        String newsletterButtonXPath = "//button[@name='submitNewsletter']";
+        String validationLabelXPath = "//p[@class = 'alert alert-danger']";
+        String expectedValidationMessage = "Newsletter : This email address is already registered.";
+        String actualValidationMessage;
+        WebElement newsletterLabel = driver.findElement(By.xpath(newsletterLabelXPath));
+        WebElement newsletterButton = driver.findElement(By.xpath(newsletterButtonXPath));
+        WebElement validationLabel;
+
+        //act
+        newsletterLabel.sendKeys(input);
+        newsletterButton.click();
+        validationLabel = driver.findElement(By.xpath(validationLabelXPath));
+        actualValidationMessage = validationLabel.getText();
+
+        //assert
+        Assertions.assertEquals(expectedValidationMessage, actualValidationMessage);
     }
 }
