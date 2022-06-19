@@ -3,12 +3,14 @@ package automationpractice;
 import driver.CustomisedDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import utils.Utils;
 
 class MainPageTest {
 
@@ -68,6 +70,32 @@ class MainPageTest {
 
         //act
         newsletterLabel.sendKeys(input);
+        newsletterButton.click();
+        validationLabel = driver.findElement(By.xpath(validationLabelXPath));
+        actualValidationMessage = validationLabel.getText();
+
+        //assert
+        Assertions.assertEquals(expectedValidationMessage, actualValidationMessage);
+    }
+
+    @RepeatedTest(5)
+    void assertThatLabelIsShownForNewlyRegisteredEmail() {
+        driver.get("http://automationpractice.com/index.php");
+        String newsletterLabelXPath = "//input[@id='newsletter-input']";
+        String newsletterButtonXPath = "//button[@name='submitNewsletter']";
+        String validationLabelXPath = "//p[@class = 'alert alert-success']";
+        String expectedValidationMessage = "Newsletter : You have successfully subscribed to this newsletter.";
+        String actualValidationMessage;
+        WebElement newsletterLabel = driver.findElement(By.xpath(newsletterLabelXPath));
+        WebElement newsletterButton = driver.findElement(By.xpath(newsletterButtonXPath));
+        WebElement validationLabel;
+        String emailDomain = "@test.pl";
+        String emailPrefix = Utils.generateRandomString(10, true, false);
+        String emailAddress = emailPrefix + emailDomain;
+
+        //act
+        System.out.println("Generated email address is: " + emailAddress);
+        newsletterLabel.sendKeys(emailAddress);
         newsletterButton.click();
         validationLabel = driver.findElement(By.xpath(validationLabelXPath));
         actualValidationMessage = validationLabel.getText();
