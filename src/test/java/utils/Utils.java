@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,5 +38,9 @@ public class Utils {
             element.click();
             Thread.sleep(sleepIntervalMilliseconds);
         }
+    }
+
+    public static String generateRandomString(int length, boolean useLetters, boolean useNumbers) {
+        return RandomStringUtils.random(length, useLetters, useNumbers);
     }
 }
