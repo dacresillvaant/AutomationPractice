@@ -10,7 +10,8 @@ public class TestClass extends TestBase {
     public void shouldOpenDesiredWebsite() {
         driver.get("http://automationpractice.com/index.php");
         ItemsGrid itemsGrid = new ItemsGrid(driver);
-        itemsGrid.printAmountOfItems().clickNthGridItem(5);
+//        itemsGrid.printAmountOfItems().clickNthItem(5);
+        itemsGrid.hoverOverNthItem(5);
     }
 
 }
