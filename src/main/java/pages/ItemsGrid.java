@@ -20,6 +20,9 @@ public class ItemsGrid {
     @FindBy(css = "div[class='product-container']")
     private List<WebElement> gridItems;
 
+    @FindBy(css = "a[title='Add to cart']")
+    private List<WebElement> addToCart;
+
     public ItemsGrid printAmountOfItems() {
         System.out.println("Amount of items is: " + gridItems.size());
         return this;
@@ -34,4 +37,10 @@ public class ItemsGrid {
         builder.moveToElement(gridItems.get(itemNumber)).perform();
         return this;
     }
+
+    public ItemsGrid addToCartNthItem(int itemNumber) {
+        addToCart.get(itemNumber).click();
+        return this;
+    }
+
 }

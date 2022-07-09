@@ -11,7 +11,7 @@ public class TestClass extends TestBase {
         driver.get("http://automationpractice.com/index.php");
         ItemsGrid itemsGrid = new ItemsGrid(driver);
 //        itemsGrid.printAmountOfItems().clickNthItem(5);
-        itemsGrid.hoverOverNthItem(5);
+        itemsGrid.hoverOverNthItem(5).addToCartNthItem(5);
     }
 
 }
