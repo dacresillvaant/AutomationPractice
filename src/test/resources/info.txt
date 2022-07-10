@@ -1,2 +1,5 @@
 https://gist.github.com/pwicherski/9884c5e44f815acafd217f42c94c0cfb - checklisty
 http://automationpractice.com/index.php - stronka, ktora testuje
+
+Login - java.scrapper1337@gmail.com
+Encoded password - {86, 86, 116, 108, 78, 87, 77, 49, 74, 48, 69, 61}
