@@ -27,6 +27,12 @@ public class Cart {
     @FindBy(css = "a[title='Proceed to checkout'][style='']")
     private WebElement proceedToCheckout;
 
+    @FindBy(css = "button[name='processAddress']")
+    private WebElement proceedToCheckoutAtAddress;
+
+    @FindBy(css = "button[name='processCarrier']")
+    private WebElement proceedToCheckoutAtShipping;
+
     @FindBy(css = "input[name='email'][value='']")
     private WebElement email;
 
@@ -36,12 +42,32 @@ public class Cart {
     @FindBy(css = "button[id='SubmitLogin']")
     private WebElement signIn;
 
+    @FindBy(css = "input[id='cgv']")
+    private WebElement termsCheckBox;
+
+    @FindBy(css = "a[class='bankwire']")
+    private WebElement byBankWire;
+
+    @FindBy(xpath = "//span[contains(text(),'I confirm my order')]")
+    private WebElement confirmOrder;
+
+
     public Cart proceedToCheckout() {
         proceedToCheckout.click();
         return this;
     }
 
-    public Cart waitForIt(WebElement element) {
+    public Cart proceedToCheckoutFromAddress() {
+        proceedToCheckoutAtAddress.click();
+        return this;
+    }
+
+    public Cart proceedToCheckoutFromShipping() {
+        proceedToCheckoutAtShipping.click();
+        return this;
+    }
+
+    public Cart waitForItClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         return this;
     }
@@ -57,6 +83,22 @@ public class Cart {
         password.sendKeys(new String(decoded));
         return this;
     }
+
+    public Cart tickTermsOfService() {
+        termsCheckBox.click();
+        return this;
+    }
+
+    public Cart payByBankWire() {
+        byBankWire.click();
+        return this;
+    }
+
+    public Cart confirmOrder() {
+        confirmOrder.click();
+        return this;
+    }
+
 
     public Cart signIn() {
         signIn.click();

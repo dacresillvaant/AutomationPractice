@@ -18,12 +18,21 @@ public class TestClass extends TestBase {
                 .waitForIt(itemsGrid.getProceedToCheckout())
                 .proceedToCheckout();
 
-        cart.waitForIt(cart.getProceedToCheckout())
+        cart.waitForItClickable(cart.getProceedToCheckout())
                 .proceedToCheckout()
-                .waitForIt(cart.getEmail())
+                .waitForItClickable(cart.getEmail())
                 .setEmail()
                 .setEncryptedPassword()
-                .signIn();
+                .signIn()
+                .waitForItClickable(cart.getProceedToCheckoutAtAddress())
+                .proceedToCheckoutFromAddress()
+                .waitForItClickable(cart.getProceedToCheckoutAtShipping())
+                .tickTermsOfService()
+                .proceedToCheckoutFromShipping()
+                .waitForItClickable(cart.getByBankWire())
+                .payByBankWire()
+                .waitForItClickable(cart.getConfirmOrder())
+                .confirmOrder();
     }
 
 }
