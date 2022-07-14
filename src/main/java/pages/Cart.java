@@ -51,6 +51,9 @@ public class Cart {
     @FindBy(xpath = "//span[contains(text(),'I confirm my order')]")
     private WebElement confirmOrder;
 
+    @FindBy(css = "p[class='cheque-indent']")
+    private WebElement orderConfirmationDetails;
+
 
     public Cart proceedToCheckout() {
         proceedToCheckout.click();
@@ -69,6 +72,11 @@ public class Cart {
 
     public Cart waitForItClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        return this;
+    }
+
+    public Cart waitForItVisible(WebElement element, String text) {
+        wait.until(ExpectedConditions.textToBePresentInElement(element, text));
         return this;
     }
 
