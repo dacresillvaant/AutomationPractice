@@ -40,4 +40,18 @@ public class AccountTests extends TestBase {
         Assert.assertTrue(menu.getSignIn().isDisplayed());
     }
 
+    @Test
+    public void shouldCreateNewAccount() {
+        driver.get("http://automationpractice.com/");
+        Menu menu = new Menu(driver);
+        Account account = new Account(driver);
+
+        menu.signIn();
+        account.waitForItClickable(account.getCreateAccount())
+                .setNewAccountEmail(8)
+                .createNewAccount()
+                .waitForItClickable(account.getRegister())
+                .setSex("male");
+    }
+
 }

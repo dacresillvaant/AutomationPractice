@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
 
 @Getter
 public class Account {
@@ -27,14 +29,35 @@ public class Account {
     @FindBy(css = "input[name='email'][value='']")
     private WebElement email;
 
+    @FindBy(css = "input[name='email_create']")
+    private WebElement emailNewAccount;
+
     @FindBy(css = "input[id='passwd']")
     private WebElement password;
 
     @FindBy(css = "button[id='SubmitLogin']")
     private WebElement signIn;
 
+    @FindBy(css = "button[id='SubmitCreate']")
+    private WebElement createAccount;
+
+    @FindBy(css = "button[name='submitAccount']")
+    private WebElement register;
+
+    @FindBy(css = "div[id^='uniform-id_gender']")
+    private List<WebElement> sex;
+
     public Account setEmail() {
         email.sendKeys("java.scrapper1337@gmail.com");
+        return this;
+    }
+
+    public Account setNewAccountEmail(int prefixLength) {
+        String domain = "@test.com";
+        String prefix = Utils.generateRandomString(prefixLength);
+        String newAccountEmail = prefix + domain;
+        System.out.println("Email to be used for creating account: " + newAccountEmail);
+        emailNewAccount.sendKeys(newAccountEmail);
         return this;
     }
 
@@ -50,8 +73,22 @@ public class Account {
         return this;
     }
 
+    public Account createNewAccount() {
+        createAccount.click();
+        return this;
+    }
+
     public Account waitForItClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        return this;
+    }
+
+    public Account setSex(String chosenSex) {
+        if (Objects.equals(chosenSex, "male")) {
+            sex.get(0).click();
+        } else {
+            sex.get(1).click();
+        }
         return this;
     }
 }

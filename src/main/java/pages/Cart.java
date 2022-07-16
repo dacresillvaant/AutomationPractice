@@ -32,9 +32,6 @@ public class Cart {
     @FindBy(css = "button[name='processCarrier']")
     private WebElement proceedToCheckoutAtShipping;
 
-    @FindBy(css = "button[id='SubmitCreate']")
-    private WebElement createAccount;
-
     @FindBy(css = "input[id='cgv']")
     private WebElement termsCheckBox;
 
