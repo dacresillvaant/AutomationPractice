@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Base64;
 
 @Getter
 public class Cart {
@@ -33,14 +32,8 @@ public class Cart {
     @FindBy(css = "button[name='processCarrier']")
     private WebElement proceedToCheckoutAtShipping;
 
-    @FindBy(css = "input[name='email'][value='']")
-    private WebElement email;
-
-    @FindBy(css = "input[id='passwd']")
-    private WebElement password;
-
-    @FindBy(css = "button[id='SubmitLogin']")
-    private WebElement signIn;
+    @FindBy(css = "button[id='SubmitCreate']")
+    private WebElement createAccount;
 
     @FindBy(css = "input[id='cgv']")
     private WebElement termsCheckBox;
@@ -53,7 +46,6 @@ public class Cart {
 
     @FindBy(css = "p[class='cheque-indent']")
     private WebElement orderConfirmationDetails;
-
 
     public Cart proceedToCheckout() {
         proceedToCheckout.click();
@@ -80,18 +72,6 @@ public class Cart {
         return this;
     }
 
-    public Cart setEmail() {
-        email.sendKeys("java.scrapper1337@gmail.com");
-        return this;
-    }
-
-    public Cart setEncryptedPassword() {
-        byte[] encodedPassword = {86, 86, 116, 108, 78, 87, 77, 49, 74, 48, 69, 61};
-        byte[] decoded = Base64.getDecoder().decode(encodedPassword);
-        password.sendKeys(new String(decoded));
-        return this;
-    }
-
     public Cart tickTermsOfService() {
         termsCheckBox.click();
         return this;
@@ -107,9 +87,4 @@ public class Cart {
         return this;
     }
 
-
-    public Cart signIn() {
-        signIn.click();
-        return this;
-    }
 }

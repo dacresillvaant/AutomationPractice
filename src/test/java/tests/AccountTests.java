@@ -2,6 +2,7 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.Account;
 import pages.Cart;
 import pages.Menu;
 import selenium.TestBase;
@@ -13,9 +14,10 @@ public class AccountTests extends TestBase {
         driver.get("http://automationpractice.com/");
         Menu menu = new Menu(driver);
         Cart cart = new Cart(driver);
+        Account account = new Account(driver);
 
         menu.signIn();
-        cart.waitForItClickable(cart.getSignIn())
+        account.waitForItClickable(account.getSignIn())
                 .setEmail()
                 .setEncryptedPassword()
                 .signIn();
@@ -26,15 +28,16 @@ public class AccountTests extends TestBase {
     public void shouldSignOut() {
         driver.get("http://automationpractice.com/");
         Menu menu = new Menu(driver);
-        Cart cart = new Cart(driver);
+        Account account = new Account(driver);
 
         menu.signIn();
-        cart.waitForItClickable(cart.getSignIn())
-                .setEmail()
+        account.waitForItClickable(account.getSignIn());
+        account.setEmail()
                 .setEncryptedPassword()
                 .signIn()
                 .waitForItClickable(menu.getSignOut());
         menu.signOut();
         Assert.assertTrue(menu.getSignIn().isDisplayed());
     }
+
 }
