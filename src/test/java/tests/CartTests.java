@@ -34,7 +34,7 @@ public class CartTests extends TestBase {
                 .payByBankWire()
                 .waitForItClickable(cart.getConfirmOrder())
                 .confirmOrder()
-                .waitForItVisible(cart.getOrderConfirmationDetails(), "Your order on My Store is complete.");
+                .waitForTextVisible(cart.getOrderConfirmationDetails(), "Your order on My Store is complete.");
 
         Assert.assertEquals(cart.getOrderConfirmationDetails().getText(), "Your order on My Store is complete.");
     }

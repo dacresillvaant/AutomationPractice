@@ -75,7 +75,7 @@ public class Cart {
         return this;
     }
 
-    public Cart waitForItVisible(WebElement element, String text) {
+    public Cart waitForTextVisible(WebElement element, String text) {
         wait.until(ExpectedConditions.textToBePresentInElement(element, text));
         return this;
     }
