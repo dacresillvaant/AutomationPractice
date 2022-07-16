@@ -21,4 +21,20 @@ public class AccountTests extends TestBase {
                 .signIn();
         Assert.assertEquals(menu.getMyAccount().getText(), "Matthew Tester");
     }
+
+    @Test
+    public void shouldSignOut() {
+        driver.get("http://automationpractice.com/");
+        Menu menu = new Menu(driver);
+        Cart cart = new Cart(driver);
+
+        menu.signIn();
+        cart.waitForItClickable(cart.getSignIn())
+                .setEmail()
+                .setEncryptedPassword()
+                .signIn()
+                .waitForItClickable(menu.getSignOut());
+        menu.signOut();
+        Assert.assertTrue(menu.getSignIn().isDisplayed());
+    }
 }
