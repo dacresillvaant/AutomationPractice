@@ -18,6 +18,8 @@ public class TestBase {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
+        //temporarily fixes problem with chrome v103
+        options.addArguments("--headless");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
