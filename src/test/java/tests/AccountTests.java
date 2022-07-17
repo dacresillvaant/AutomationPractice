@@ -51,7 +51,11 @@ public class AccountTests extends TestBase {
                 .setNewAccountEmail(8)
                 .createNewAccount()
                 .waitForItClickable(account.getRegister())
-                .setSex("male");
+                .setSex("male")
+                .setFirstName("inputFN")
+                .setLastName("inputLN")
+                .setPassword("password123+PASS")
+                .setDayOfBirth("5");
     }
 
 }
