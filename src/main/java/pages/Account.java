@@ -44,7 +44,7 @@ public class Account {
     @FindBy(css = "button[name='submitAccount']")
     private WebElement register;
 
-    @FindBy(css = "div[id^='uniform-id_gender']")
+    @FindBy(css = "input[name='id_gender']")
     private List<WebElement> sex;
 
     public Account setEmail() {
