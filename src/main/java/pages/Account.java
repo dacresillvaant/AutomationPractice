@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.Year;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +57,12 @@ public class Account {
 
     @FindBy(css = "select[id = 'days']")
     private WebElement dayOfBirthSelect;
+
+    @FindBy(css = "select[id = 'months']")
+    private WebElement monthOfBirthSelect;
+
+    @FindBy(css = "select[id = 'years']")
+    private WebElement yearOfBirthSelect;
 
 
     public Account setEmail() {
@@ -119,8 +126,21 @@ public class Account {
     }
 
     public Account setDayOfBirth(String value) {
-        System.out.println(dayOfBirthSelect.isDisplayed());
         new Select(dayOfBirthSelect).selectByValue(value);
+        return this;
+    }
+
+    public Account setMonthOfBirth(String value) {
+        new Select(monthOfBirthSelect).selectByValue(value);
+        return this;
+    }
+
+    public Account setYearOfBirth(String value) {
+        if (Integer.parseInt(value) > Year.now().getValue() || Integer.parseInt(value) < 1900) {
+            System.out.println("Incorrect year - chosen year has to be greater or equal to 1900 and less or equal to current year.");
+        } else {
+            new Select(yearOfBirthSelect).selectByValue(value);
+        }
         return this;
     }
 }

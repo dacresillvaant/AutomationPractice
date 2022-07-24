@@ -14,11 +14,12 @@ public class TestBase {
 
     @BeforeMethod
     public void setUp() {
-//        WebDriverManager.chromedriver().setup();
-        WebDriverManager.operadriver().setup();
+        WebDriverManager.chromedriver().setup();
+//        WebDriverManager.operadriver().setup();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
+//        options.addArguments("--headless");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();

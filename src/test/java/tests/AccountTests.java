@@ -55,7 +55,9 @@ public class AccountTests extends TestBase {
                 .setFirstName("inputFN")
                 .setLastName("inputLN")
                 .setPassword("password123+PASS")
-                .setDayOfBirth("5");
+                .setDayOfBirth("5")
+                .setMonthOfBirth("6")
+                .setYearOfBirth("2022");
     }
 
 }
