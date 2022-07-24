@@ -57,7 +57,14 @@ public class AccountTests extends TestBase {
                 .setPassword("password123+PASS")
                 .setDayOfBirth("5")
                 .setMonthOfBirth("6")
-                .setYearOfBirth("2022");
+                .setYearOfBirth("2022")
+                .setAddress("Test address")
+                .setCity("New York")
+                .setState("32")
+                .setPostCode("10001")
+                .setMobilePhone("500500500")
+                .setAddressAlias("Home")
+                .register();
     }
 
 }

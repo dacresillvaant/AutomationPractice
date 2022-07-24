@@ -64,6 +64,23 @@ public class Account {
     @FindBy(css = "select[id = 'years']")
     private WebElement yearOfBirthSelect;
 
+    @FindBy(css = "input[id = 'address1']")
+    private WebElement address;
+
+    @FindBy(css = "input[id = 'city']")
+    private WebElement city;
+
+    @FindBy(css = "select[id = 'id_state']")
+    private WebElement stateSelect;
+
+    @FindBy(css = "input[id = 'postcode']")
+    private WebElement postalCode;
+
+    @FindBy(css = "input[id = 'phone_mobile']")
+    private WebElement mobilePhone;
+
+    @FindBy(css = "input[id = 'alias']")
+    private WebElement addressAlias;
 
     public Account setEmail() {
         email.sendKeys("java.scrapper1337@gmail.com");
@@ -141,6 +158,42 @@ public class Account {
         } else {
             new Select(yearOfBirthSelect).selectByValue(value);
         }
+        return this;
+    }
+
+    public Account setAddress(String value) {
+        address.sendKeys(value);
+        return this;
+    }
+
+    public Account setCity(String value) {
+        city.sendKeys(value);
+        return this;
+    }
+
+    public Account setState(String value) {
+        new Select(stateSelect).selectByValue(value);
+        return this;
+    }
+
+    public Account setPostCode(String value) {
+        postalCode.sendKeys(value);
+        return this;
+    }
+
+    public Account setMobilePhone(String value) {
+        mobilePhone.sendKeys(value);
+        return this;
+    }
+
+    public Account setAddressAlias(String value) {
+        addressAlias.clear();
+        addressAlias.sendKeys(value);
+        return this;
+    }
+
+    public Account register() {
+        register.click();
         return this;
     }
 }
