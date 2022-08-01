@@ -1,6 +1,5 @@
 package tests;
 
-import com.beust.ah.A;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Account;
@@ -21,7 +20,6 @@ public class CartTests extends TestBase {
                 .addToCartNthItem(5)
                 .waitForIt(itemsGrid.getProceedToCheckout())
                 .proceedToCheckout();
-
         cart.waitForItClickable(cart.getProceedToCheckout())
                 .proceedToCheckout();
         account.waitForItClickable(account.getEmail())
@@ -38,8 +36,6 @@ public class CartTests extends TestBase {
                 .waitForItClickable(cart.getConfirmOrder())
                 .confirmOrder()
                 .waitForTextVisible(cart.getOrderConfirmationDetails(), "Your order on My Store is complete.");
-
         Assert.assertEquals(cart.getOrderConfirmationDetails().getText(), "Your order on My Store is complete.");
     }
-
 }

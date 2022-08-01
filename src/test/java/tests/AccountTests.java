@@ -31,8 +31,8 @@ public class AccountTests extends TestBase {
         Account account = new Account(driver);
 
         menu.signIn();
-        account.waitForItClickable(account.getSignIn());
-        account.setEmail()
+        account.waitForItClickable(account.getSignIn())
+                .setEmail()
                 .setEncryptedPassword()
                 .signIn()
                 .waitForItClickable(menu.getSignOut());
@@ -64,7 +64,9 @@ public class AccountTests extends TestBase {
                 .setPostCode("10001")
                 .setMobilePhone("500500500")
                 .setAddressAlias("Home")
-                .register();
+                .register()
+                .waitForItClickable(menu.getSignOut());
+        Assert.assertTrue(menu.getSignOut().isDisplayed());
     }
 
 }
