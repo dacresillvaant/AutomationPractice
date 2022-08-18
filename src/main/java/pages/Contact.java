@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+@Getter
 public class Contact {
 
     public Contact(WebDriver driver) {
@@ -37,13 +39,16 @@ public class Contact {
     @FindBy(css = "textarea[id='message']")
     private WebElement messageArea;
 
+    @FindBy(css = "p[class='alert alert-success']")
+    private WebElement successfulLabel;
+
     public Contact waitForItClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         return this;
     }
 
     public Contact setSubject(String value) {
-        new Select(subjectSelect).selectByValue(value);
+        new Select(subjectSelect).selectByVisibleText(value);
         return this;
     }
 
@@ -61,4 +66,10 @@ public class Contact {
         messageArea.sendKeys(value);
         return this;
     }
+
+    public Contact sendMessage() {
+        send.click();
+        return this;
+    }
+
 }
